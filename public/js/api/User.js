@@ -8,8 +8,12 @@ class User {
    * Устанавливает текущего пользователя в
    * локальном хранилище.
    * */
-  static setCurrent(user) {
 
+  static url = '/user';
+
+
+  static setCurrent(user) {
+    localStorage.user = user;
   }
 
   /**
@@ -18,6 +22,7 @@ class User {
    * */
   static unsetCurrent() {
 
+
   }
 
   /**
@@ -25,7 +30,11 @@ class User {
    * из локального хранилища
    * */
   static current() {
-
+    if (localStorage.user === null) {
+      return undefined;
+    } else if (localStorage.user !== null) {
+      return localStorage.user;
+    }
   }
 
   /**
@@ -33,6 +42,7 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch( data, callback = f => f ) {
+
 
   }
 
@@ -53,7 +63,12 @@ class User {
    * User.setCurrent.
    * */
   static register( data, callback = f => f ) {
-
+    createRequest({
+      data: data,
+      method: 'POST',
+      url: '/user/register',
+      callback: callback
+    });
   }
 
   /**
