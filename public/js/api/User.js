@@ -67,7 +67,12 @@ class User {
       data: data,
       method: 'POST',
       url: '/user/register',
-      callback: callback
+      callback( err, response ) {
+        if ( response && response.user ) {
+          User.setCurrent( response.user );
+        }
+        callback( err, response );
+      }
     });
   }
 

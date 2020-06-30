@@ -3,6 +3,7 @@
  * на сервер.
  * */
 const createRequest = (options = {}) => {
+  let xhrResponce;
   let xhr = new XMLHttpRequest();
   let err;
   try {
@@ -40,16 +41,13 @@ const createRequest = (options = {}) => {
   }
     xhr.addEventListener('readystatechange', (event) => {
         if (xhr.readyState == xhr.DONE) {
-          console.log(xhr);
-          JSON.stringify(options.callback(err, xhr.response));
+            xhrResponce = options.callback(err, xhr.response);
         }
 
 
     });
-    
-    
 
+    
+    
 };
-
-
 
